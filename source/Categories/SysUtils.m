@@ -42,8 +42,13 @@
     NSString* selectToolPath = [relToolBase stringByAppendingPathComponent: @"xcode-select"];
     NSTask* selectTask = [[[NSTask alloc] init] autorelease];
     NSPipe* selectPipe = [NSPipe pipe];
-    NSArray* args = [NSArray arrayWithObject: @"--print-path"];
-
+    
+    /* Pre Xcode 4 */
+    //NSArray* args = [NSArray arrayWithObject: @"--print-path"];
+    
+    /* Xcode 4 & 5 */
+    NSArray* args = [NSArray arrayWithObject: @"-switch /Applications/Xcode.app/Contents/Developer"];
+    
     [selectTask setLaunchPath: selectToolPath];
     [selectTask setArguments: args];
     [selectTask setStandardInput: [NSPipe pipe]];
